@@ -120,7 +120,7 @@ const getStudentData = async function (req, res) {
         if (!mongoose.isValidObjectId(conditions.studentId))return res.status(400).send({ status: false, msg: "Please Enter studentID as a valid ObjectId" })}
 
     // Fetching the Students  
-    let students = await studentModel.find({$and: [conditions, { isDeleted: false }, { isPublished: true }]});
+    let students = await studentModel.find({$and: [conditions, { isDeleted: false }]});
 
     if (students.length == 0)return res.status(404).send({ status: false, msg: "No Students found" });
 
