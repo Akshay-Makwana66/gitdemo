@@ -156,7 +156,7 @@ const updateStudentData = async function (req, res) {
 const deleteStudentData = async function (req, res) {
   try {
     let studentId = req.params.studentId;
-    if (!mongoose.isValidObjectId(studentId))return res.status(400).send({ status: false, msg: "Please Enter authorID as a valid ObjectId" })
+    if (!mongoose.isValidObjectId(studentId))return res.status(400).send({ status: false, msg: "Please Enter studentId as a valid ObjectId" })
 
     let student = await studentModel.findOneAndUpdate(
       { _id: studentId, isDeleted: false },{ $set: { isDeleted: true } });
