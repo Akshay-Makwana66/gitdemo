@@ -117,7 +117,7 @@ const getStudentData = async function (req, res) {
     let conditions = req.query; 
     // Checks whether studentId isa valid ObjectId
       if(conditions.studentId) {
-        if (!mongoose.isValidObjectId(conditions.studentId))return res.status(400).send({ status: false, msg: "Please Enter authorID as a valid ObjectId" })}
+        if (!mongoose.isValidObjectId(conditions.studentId))return res.status(400).send({ status: false, msg: "Please Enter studentID as a valid ObjectId" })}
 
     // Fetching the Students  
     let students = await studentModel.find({$and: [conditions, { isDeleted: false }, { isPublished: true }]});
@@ -135,7 +135,7 @@ const getStudentData = async function (req, res) {
 const updateStudentData = async function (req, res) {
   try {
     let studentId = req.params.studentId;
-    if (!mongoose.isValidObjectId(studentId))return res.status(400).send({ status: false, msg: "Please Enter authorID as a valid ObjectId" })
+    if (!mongoose.isValidObjectId(studentId))return res.status(400).send({ status: false, msg: "Please Enter studentID as a valid ObjectId" })
 
     let studentData = req.body;
     if (Object.keys(studentData).length == 0)return res.status(400).send({ status: false, msg: "Body cannot be empty" });
@@ -144,7 +144,7 @@ const updateStudentData = async function (req, res) {
     let updatedStudent = await studentModel.findOneAndUpdate(
       { _id: studentId, isDeleted: false }, studentData, { new: true } );
 
-    if(!updatedStudent) return res.status(404).send({status:false,msg:"No blogs found"})
+    if(!updatedStudent) return res.status(404).send({status:false,msg:"No students found"})
 
     res.status(200).send({ status: true, data: updatedStudent });
   } catch (error) {
